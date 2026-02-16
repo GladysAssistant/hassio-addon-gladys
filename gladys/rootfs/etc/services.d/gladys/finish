@@ -1,6 +1,0 @@
-#!/usr/bin/with-contenv bashio
-# ==============================================================================
-# Cleanup Gladys Assistant on stop
-# ==============================================================================
-
-bashio::log.info "Gladys Assistant stopped."

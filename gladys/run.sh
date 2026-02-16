@@ -1,19 +1,20 @@
-#!/usr/bin/with-contenv bashio
+#!/usr/bin/env bash
+set -e
+
 # ==============================================================================
 # Start Gladys Assistant
 # ==============================================================================
 
-declare server_port
-declare timezone
+# Read configuration from Home Assistant addon options
+OPTIONS_FILE="/data/options.json"
 
-# Read configuration options
-server_port=$(bashio::config 'server_port')
-timezone=$(bashio::config 'timezone')
+server_port=$(jq -r '.server_port' "${OPTIONS_FILE}")
+timezone=$(jq -r '.timezone' "${OPTIONS_FILE}")
 
-bashio::log.info "Starting Gladys Assistant..."
-bashio::log.info "Server port: ${server_port}"
-bashio::log.info "Timezone: ${timezone}"
-bashio::log.info "Data path: /data"
+echo "[INFO] Starting Gladys Assistant..."
+echo "[INFO] Server port: ${server_port}"
+echo "[INFO] Timezone: ${timezone}"
+echo "[INFO] Data path: /data"
 
 # Symlink Docker socket so Gladys can find it at the expected path
 if [ -S /run/docker.sock ] && [ ! -e /var/run/docker.sock ]; then
@@ -27,5 +28,5 @@ export TZ="${timezone}"
 export SQLITE_FILE_PATH=/data/gladys-production.db
 
 # Start Gladys (source code is at /src/server in the Gladys image)
-cd /src/server || bashio::exit.nok "Gladys source directory not found"
+cd /src/server
 exec node index.js

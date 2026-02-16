@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+- Simplified Dockerfile: removed s6-overlay, use Gladys image directly with a simple run.sh
+
 ## 2.0.0
 
 - **Breaking change**: Refactored addon to run Gladys directly (no more Docker-in-Docker)

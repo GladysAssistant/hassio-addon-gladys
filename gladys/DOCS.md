@@ -4,7 +4,7 @@
 
 [Gladys Assistant](https://gladysassistant.com/) is a privacy-first, open-source home automation software that runs on any Linux machine.
 
-This add-on launches the official Gladys Assistant Docker container directly on your Home Assistant instance, allowing you to run both systems side by side.
+This add-on runs Gladys Assistant natively inside a Home Assistant add-on container, allowing you to run both systems side by side.
 
 ## Installation
 
@@ -37,15 +37,24 @@ timezone: "Europe/London"
 
 ## Data Persistence
 
-All Gladys data (database, configuration, etc.) is stored in `/data/gladys` inside the add-on. This data persists across add-on restarts and updates.
+All Gladys data (database, configuration, etc.) is stored in `/data` inside the add-on. This data:
+
+- **Persists** across add-on restarts and updates
+- **Is included** in Home Assistant backups
 
 ## Network
 
 This add-on uses the host network mode, which means Gladys Assistant will be accessible directly on the configured port of your Home Assistant host IP address.
 
-## Docker in Docker
+## Docker Access
 
-This add-on runs Gladys Assistant as a Docker container inside the Home Assistant add-on container (Docker-in-Docker). This is required because Gladys needs access to the Docker socket to manage its own integrations.
+Gladys Assistant can manage Docker containers (MQTT, Zigbee2mqtt, etc.). For this to work, you must **disable Protection Mode** in the add-on settings:
+
+1. Go to **Settings** → **Add-ons** → **Gladys Assistant**
+2. Toggle **Protection mode** to **OFF**
+3. Restart the add-on
+
+> **Note:** This is required because Home Assistant only exposes the Docker socket to add-ons when Protection Mode is disabled.
 
 ## Support
 

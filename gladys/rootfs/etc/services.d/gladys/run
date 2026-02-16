@@ -5,52 +5,27 @@
 
 declare server_port
 declare timezone
-declare gladys_data_path
-
-# Set Docker socket path for HA addons
-export DOCKER_HOST="unix:///run/docker.sock"
 
 # Read configuration options
 server_port=$(bashio::config 'server_port')
 timezone=$(bashio::config 'timezone')
 
-# Data path for Gladys persistent storage
-gladys_data_path="/data/gladys"
-
-# Create data directory if it doesn't exist
-mkdir -p "${gladys_data_path}"
-
 bashio::log.info "Starting Gladys Assistant..."
 bashio::log.info "Server port: ${server_port}"
 bashio::log.info "Timezone: ${timezone}"
-bashio::log.info "Data path: ${gladys_data_path}"
+bashio::log.info "Data path: /data"
 
-# Check if a Gladys container already exists
-if docker inspect gladys > /dev/null 2>&1; then
-    bashio::log.info "Removing existing Gladys container..."
-    docker rm -f gladys > /dev/null 2>&1 || true
+# Symlink Docker socket so Gladys can find it at the expected path
+if [ -S /run/docker.sock ] && [ ! -e /var/run/docker.sock ]; then
+    ln -s /run/docker.sock /var/run/docker.sock
 fi
 
-# Pull the latest Gladys image
-bashio::log.info "Pulling latest Gladys Assistant image..."
-docker pull gladysassistant/gladys:v4
+# Set environment variables for Gladys
+export NODE_ENV=production
+export SERVER_PORT="${server_port}"
+export TZ="${timezone}"
+export SQLITE_FILE_PATH=/data/gladys-production.db
 
-# Start Gladys container using the official Docker run command
-bashio::log.info "Starting Gladys Assistant container..."
-docker run \
-    --rm \
-    --log-driver json-file \
-    --log-opt max-size=10m \
-    --cgroupns=host \
-    --privileged \
-    --network=host \
-    --name gladys \
-    -e NODE_ENV=production \
-    -e SERVER_PORT="${server_port}" \
-    -e TZ="${timezone}" \
-    -e SQLITE_FILE_PATH=/var/lib/gladysassistant/gladys-production.db \
-    -v /run/docker.sock:/var/run/docker.sock \
-    -v "${gladys_data_path}":/var/lib/gladysassistant \
-    -v /dev:/dev \
-    -v /run/udev:/run/udev:ro \
-    gladysassistant/gladys:v4
+# Start Gladys (source code is at /src/server in the Gladys image)
+cd /src/server || bashio::exit.nok "Gladys source directory not found"
+exec node index.js

@@ -1,6 +1,6 @@
 name: "Gladys Assistant"
 description: "A privacy-first, open-source home automation software"
-version: "1.0.1"
+version: "2.0.0"
 slug: "gladys"
 url: "https://gladysassistant.com"
 arch:
@@ -10,22 +10,13 @@ arch:
 init: false
 homeassistant_api: false
 host_network: true
-privileged:
-  - SYS_ADMIN
-  - DAC_READ_SEARCH
-full_access: true
-docker_api: true
-devicetree: true
-uart: true
 usb: true
+uart: true
 gpio: true
 audio: false
 video: false
 hassio_api: false
-apparmor: false
-map:
-  - share:rw
-  - ssl:ro
+docker_api: true
 options:
   server_port: 8080
   timezone: "Europe/Paris"

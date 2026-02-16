@@ -7,6 +7,9 @@ declare server_port
 declare timezone
 declare gladys_data_path
 
+# Set Docker socket path for HA addons
+export DOCKER_HOST="unix:///run/docker.sock"
+
 # Read configuration options
 server_port=$(bashio::config 'server_port')
 timezone=$(bashio::config 'timezone')
@@ -46,7 +49,7 @@ docker run \
     -e SERVER_PORT="${server_port}" \
     -e TZ="${timezone}" \
     -e SQLITE_FILE_PATH=/var/lib/gladysassistant/gladys-production.db \
-    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /run/docker.sock:/var/run/docker.sock \
     -v "${gladys_data_path}":/var/lib/gladysassistant \
     -v /dev:/dev \
     -v /run/udev:/run/udev:ro \

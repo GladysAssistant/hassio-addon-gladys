@@ -3,6 +3,8 @@
 # Cleanup Gladys Assistant on stop
 # ==============================================================================
 
+export DOCKER_HOST="unix:///run/docker.sock"
+
 bashio::log.info "Stopping Gladys Assistant container..."
 docker stop gladys > /dev/null 2>&1 || true
 docker rm -f gladys > /dev/null 2>&1 || true

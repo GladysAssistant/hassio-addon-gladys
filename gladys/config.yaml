@@ -1,6 +1,6 @@
 name: "Gladys Assistant"
 description: "A privacy-first, open-source home automation software"
-version: "1.0.0"
+version: "1.0.1"
 slug: "gladys"
 url: "https://gladysassistant.com"
 arch:

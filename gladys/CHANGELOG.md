@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Fix Docker socket path for Home Assistant OS (`/run/docker.sock`)
+
 ## 1.0.0
 
 - Initial release

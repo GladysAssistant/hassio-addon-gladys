@@ -1,0 +1,12 @@
+build_from:
+  aarch64: "ghcr.io/home-assistant/aarch64-base:3.19"
+  amd64: "ghcr.io/home-assistant/amd64-base:3.19"
+  armv7: "ghcr.io/home-assistant/armv7-base:3.19"
+args:
+  BUILD_ARCH: "{arch}"
+  BUILD_DATE: "{date}"
+  BUILD_DESCRIPTION: "A privacy-first, open-source home automation software"
+  BUILD_NAME: "Gladys Assistant"
+  BUILD_REF: "{ref}"
+  BUILD_REPOSITORY: "GladysAssistant/hassio-addon-gladys"
+  BUILD_VERSION: "{version}"

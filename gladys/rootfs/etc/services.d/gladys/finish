@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Cleanup Gladys Assistant on stop
+# ==============================================================================
+
+bashio::log.info "Stopping Gladys Assistant container..."
+docker stop gladys > /dev/null 2>&1 || true
+docker rm -f gladys > /dev/null 2>&1 || true
+bashio::log.info "Gladys Assistant stopped."

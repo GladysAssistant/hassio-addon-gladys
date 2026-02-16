@@ -1,0 +1,9 @@
+configuration:
+  server_port:
+    name: Port du serveur
+    description: Le port sur lequel Gladys Assistant sera accessible.
+  timezone:
+    name: Fuseau horaire
+    description: >-
+      Le fuseau horaire utilisé par Gladys Assistant (ex: Europe/Paris, America/New_York).
+      Voir https://en.wikipedia.org/wiki/List_of_tz_database_time_zones pour les valeurs valides.

@@ -1,0 +1,9 @@
+configuration:
+  server_port:
+    name: Server Port
+    description: The port on which Gladys Assistant will be accessible.
+  timezone:
+    name: Timezone
+    description: >-
+      The timezone used by Gladys Assistant (e.g., Europe/Paris, America/New_York).
+      See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for valid values.

@@ -16,6 +16,13 @@ echo "[INFO] Server port: ${server_port}"
 echo "[INFO] Timezone: ${timezone}"
 echo "[INFO] Data path: /data"
 
+# Symlink /var/lib/gladysassistant to /data so Gladys integrations
+# (MQTT, Zigbee2mqtt, etc.) write to the persistent addon data directory
+if [ ! -e /var/lib/gladysassistant ] || [ ! -L /var/lib/gladysassistant ]; then
+    rm -rf /var/lib/gladysassistant
+    ln -s /data /var/lib/gladysassistant
+fi
+
 # Symlink Docker socket so Gladys can find it at the expected path
 if [ -S /run/docker.sock ] && [ ! -e /var/run/docker.sock ]; then
     ln -s /run/docker.sock /var/run/docker.sock

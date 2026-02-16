@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.2
+
+- Fix: symlink `/var/lib/gladysassistant` → `/data` so Gladys integrations (MQTT, Zigbee2mqtt) write config to the persistent addon data directory
+
 ## 2.0.1
 
 - Simplified Dockerfile: removed s6-overlay, use Gladys image directly with a simple run.sh

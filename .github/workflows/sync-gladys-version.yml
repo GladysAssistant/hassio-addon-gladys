@@ -1,0 +1,30 @@
+name: Sync Gladys version
+
+on:
+  schedule:
+    # Daily at 06:00 UTC
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync add-on version with latest Gladys release
+        run: bash .github/scripts/sync-gladys-version.sh
+
+      - name: Push changes
+        run: |
+          if git log "origin/${GITHUB_REF_NAME}"..HEAD --oneline | grep -q .; then
+            git push
+          else
+            echo "No commits to push."
+          fi

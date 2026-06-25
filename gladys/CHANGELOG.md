@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.80.0
+
+- Update Gladys Assistant to v4.80.0
+
 ## 2.0.2
 
 - Fix: symlink `/var/lib/gladysassistant` → `/data` so Gladys integrations (MQTT, Zigbee2mqtt) write config to the persistent addon data directory

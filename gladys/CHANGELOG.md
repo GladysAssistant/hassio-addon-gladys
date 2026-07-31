@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.84.0
+
+- Update Gladys Assistant to v4.84.0
+
 ## 4.83.0
 
 - Update Gladys Assistant to v4.83.0

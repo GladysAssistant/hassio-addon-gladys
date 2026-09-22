@@ -1,7 +1,7 @@
 build_from:
-  aarch64: "gladysassistant/gladys:v5.0.4"
-  amd64: "gladysassistant/gladys:v5.0.4"
-  armv7: "gladysassistant/gladys:v5.0.4"
+  aarch64: "gladysassistant/gladys:v5.1.1"
+  amd64: "gladysassistant/gladys:v5.1.1"
+  armv7: "gladysassistant/gladys:v5.1.1"
 args:
   BUILD_ARCH: "{arch}"
   BUILD_DATE: "{date}"

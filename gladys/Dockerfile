@@ -1,4 +1,4 @@
-ARG BUILD_FROM=gladysassistant/gladys:v5.1.1
+ARG BUILD_FROM=gladysassistant/gladys:v5.1.3
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 

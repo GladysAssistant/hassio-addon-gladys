@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.3.4
+
+- Update Gladys Assistant to v5.3.4
+
 ## 5.3.3
 
 - Update Gladys Assistant to v5.3.3
